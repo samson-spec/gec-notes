@@ -114,7 +114,7 @@ const NoteDetailPage = () => {
                 />
               </div>
               <div className="card-actions justify-end">
-                <button className="btn btn-primary" disabled={saving} onClick={handleSave}>
+                <button className="btn btn-secondary text-white" disabled={saving} onClick={handleSave}>
                   {saving ? "Saving..." : "Save Changes"}
                 </button>
               </div>
