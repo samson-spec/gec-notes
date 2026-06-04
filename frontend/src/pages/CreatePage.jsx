@@ -53,7 +53,7 @@ const CreatePage = () => {
               Back to Notes
             </Link>
 
-            <div className="card bg-base-100">
+            <div className="card bg-base-100 shadow-md">
               <div className="card-body">
                 <h2 className="card-title text-2xl mb-4">Create New Note</h2>
 
