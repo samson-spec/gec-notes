@@ -46,8 +46,8 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<HomePage user={user} setUser={setUser} authLoading={authLoading}/>} />
-        <Route path="/login" element={user ? <Navigate to="/"/> : <Login setUser={setUser}/>} />
-        <Route path="/register" element={user ? <Navigate to="/"/> : <Register setUser={setUser}/>} />
+        <Route path="/login" element={user ? <Navigate to="/" replace/> : <Login setUser={setUser}/>} />
+        <Route path="/register" element={user ? <Navigate to="/" replace/> : <Register setUser={setUser}/>} />
         <Route path="/create" element={<CreatePage user={user} setUser={setUser} authLoading={authLoading}/>} />
         <Route path="/note/:id" element={<NoteDetailPage user={user} setUser={setUser} authLoading={authLoading}/>} />
         <Route path="*" element={<PageNotFound user={user} setUser={setUser} authLoading={authLoading}/>}/>
