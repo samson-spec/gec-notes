@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
 import Navbar from "../components/Navbar";
 
-const CreatePage = () => {
+const CreatePage = ({user, setUser, authLoading}) => {
 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
@@ -48,7 +48,7 @@ const CreatePage = () => {
   return (
     <div className="min-h-screen">
 
-      <Navbar/>
+      <Navbar user={user} setUser={setUser} authLoading={authLoading}/>   
 
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">

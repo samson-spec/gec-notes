@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { ArrowLeftIcon, LoaderIcon, Trash2Icon } from "lucide-react";
 import Navbar from "../components/Navbar";
 
-const NoteDetailPage = () => {
+const NoteDetailPage = ({user, setUser, authLoading}) => {
 
   const [note, setNote] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -75,7 +75,7 @@ const NoteDetailPage = () => {
   return (
     <div className="min-h-screen">
 
-      <Navbar/>
+      <Navbar user={user} setUser={setUser} authLoading={authLoading}/>
 
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-2xl mx-auto">

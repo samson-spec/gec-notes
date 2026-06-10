@@ -1,9 +1,40 @@
 import { useState } from "react";
 import Navbar from "../components/Navbar";
+import axios from "axios";
+import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
-const Login = () => {
+const Login = ({setUser}) => {
 
-    const [error, setError] = useState("");
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+    });
+    // const [error, setError] = useState("");
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try{
+            const res = await axios.post("/api/users/login", formData);
+            localStorage.setItem("token", res.data.token);
+            console.log(res.data);
+            setUser(res.data);
+
+            toast.success("Login successfull");
+            navigate('/');
+        }catch(error){
+            // setError(error.response?.data?.message || "Login failed!");
+            toast.error(
+                error.response?.data?.message || "Login failed!"
+            );
+        }
+    }
+    
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -15,18 +46,36 @@ const Login = () => {
               Login
             </h1>
 
-            {error && <p className="text-red-500 my-4 text-sm text-center"> {error} </p>}
+            {/* {error && (
+                <div
+                    key={error}
+                    className="bg-error/10 border border-error text-error text-center rounded-lg px-4 py-3 mt-4 text-sm animate-shake"
+                >
+                    {error}
+                </div>
+            )} */}
 
-            <form className="space-y-4">
+            {/* {error && (
+                <div className="mt-4 rounded-xl bg-error/15 border border-error/30 p-3">
+                    <p className="text-error text-sm text-center font-medium">
+                    {error}
+                    </p>
+                </div>
+            )} */}
+
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="Enter your email"
-                  className="input input-bordered w-full focus:input-secondary
-                  required"
+                  className="input input-bordered w-full focus:input-secondary"
+                  required
                 />
               </div>
 
@@ -36,9 +85,12 @@ const Login = () => {
                 </label>
                 <input
                   type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
                   placeholder="Enter your password"
-                  className="input input-bordered w-full focus:input-secondary
-                  required"
+                  className="input input-bordered w-full focus:input-secondary"
+                  required
                 />
               </div>
 

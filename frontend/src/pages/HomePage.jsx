@@ -7,7 +7,7 @@ import toast from "react-hot-toast"
 import NoteCard from "../components/NoteCard"
 import NotesNotFound from "../components/NotesNotFound"
 
-const HomePage = () => {
+const HomePage = ({user, setUser, error, authLoading}) => {
     const [isRateLimited, setIsRateLimited] = useState(false)
     const [notes, setNotes] = useState([])
     const [loading, setLoading] = useState(true)
@@ -41,10 +41,69 @@ const HomePage = () => {
     return (
         <div className="min-h-screen">
 
-            <Navbar/>      
+            <Navbar user={user} setUser={setUser} authLoading={authLoading}/>      
             {isRateLimited && <RateLimitedUI/>} 
 
              <div className="max-w-7xl mx-auto p-4 mt-6">
+
+                {!authLoading && (user ? (
+                    <div className="mb-6">
+                        <div className="flex items-center gap-3 p-4 bg-base-100 rounded-xl shadow-sm border border-base-300">
+                        
+                        <div className="avatar placeholder">
+                            <div className="bg-secondary text-white rounded-full w-12">
+                            <span className="text-lg font-semibold">
+                                {user.username.charAt(0).toUpperCase()}
+                            </span>
+                            </div>
+                        </div>
+
+                        <div className="flex-1">
+                            <div className="flex items-center gap-2">
+                            <h2 className="font-bold text-lg">
+                                {user.username}
+                            </h2>
+
+                            <span className="relative flex h-3 w-3">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-3 w-3 bg-success"></span>
+                            </span>
+                            </div>
+
+                            <p className="text-sm text-base-content/60">
+                            {user.email}
+                            </p>
+                        </div>
+
+                        <div className="badge badge-success badge-outline">
+                            Online
+                        </div>
+                        </div>
+                    </div>
+                ) : (
+                    <div className="mb-6">
+                        <div className="bg-base-100 rounded-xl shadow-sm border border-base-300 p-6">
+                        <h2 className="text-2xl font-bold text-secondary">
+                            Welcome 👋
+                        </h2>
+
+                        <p className="mt-2 text-base-content/70">
+                            Please login or create an account to access your notes and manage them securely.
+                        </p>
+
+                        <div className="mt-4 flex gap-3">
+                            <a href="/login" className="btn btn-secondary text-white">
+                            Login
+                            </a>
+
+                            <a href="/register" className="btn btn-outline hover:!text-white btn-secondary">
+                            Register
+                            </a>
+                        </div>
+                        </div>
+                    </div>
+                ))}
+
                 {loading && <div className="text-center text-secondary py-10">Loading notes...</div>}
 
                 {!loading && notes.length === 0 && !isRateLimited && <NotesNotFound/>}

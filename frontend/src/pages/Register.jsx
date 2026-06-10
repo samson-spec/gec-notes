@@ -1,6 +1,41 @@
 import Navbar from "../components/Navbar";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router";
+import toast from "react-hot-toast";
 
-const Register = () => {
+const Register = ({setUser}) => {
+
+    const [formData, setFormData] = useState({
+        username: "",
+        email: "",
+        password: "",
+    });
+    // const [error, setError] = useState("");
+    const navigate = useNavigate();
+
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try{
+            const res = await axios.post("/api/users/register", formData);
+            localStorage.setItem("token", res.data.token);
+            console.log(res.data);
+            setUser(res.data);
+
+            toast.success("Registration successfull");
+            navigate('/');
+        }catch(error){
+            // setError(error.response?.data?.message || "Registration failed!");
+            toast.error(
+                error.response?.data?.message || "Registration failed!"
+            );
+        }
+    }
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -12,16 +47,19 @@ const Register = () => {
               Create Account
             </h1>
 
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div>
                 <label className="label">
                   <span className="label-text">Username</span>
                 </label>
                 <input
                   type="text"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
                   placeholder="Choose a username"
-                  className="input input-bordered w-full focus:input-secondary
-                  required"
+                  className="input input-bordered w-full focus:input-secondary"
+                  required
                 />
               </div>
 
@@ -31,9 +69,12 @@ const Register = () => {
                 </label>
                 <input
                   type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="Enter your email"
-                  className="input input-bordered w-full focus:input-secondary
-                  required"
+                  className="input input-bordered w-full focus:input-secondary"
+                  required
                 />
               </div>
 
@@ -43,6 +84,9 @@ const Register = () => {
                 </label>
                 <input
                   type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
                   placeholder="Create a password"
                   className="input input-bordered w-full focus:input-secondary
                   required"

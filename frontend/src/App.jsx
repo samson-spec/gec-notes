@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 import HomePage from "./pages/HomePage";
 import CreatePage from "./pages/CreatePage";
 import NoteDetailPage from "./pages/NoteDetailPage";
@@ -7,12 +7,16 @@ import Register from "./pages/Register";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
+import PageNotFound from "./components/PageNotFound";
 
 const App = () => {
 
   const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
+
   const [error, setError] = useState('');
 
+  console.log(user);
   useEffect(() => {
     const fetchUser = async () => {
       const token = localStorage.getItem("token");
@@ -30,7 +34,10 @@ const App = () => {
         }
       }
 
-    }
+      setAuthLoading(false);
+
+    };
+    fetchUser();
   }, []);
 
   return (
@@ -38,11 +45,12 @@ const App = () => {
       <div className="absolute inset-0 -z-10  h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
       <Routes>
-        <Route path="/" element={<HomePage/>} />
-        <Route path="/login" element={<Login/>} />
-        <Route path="/register" element={<Register/>} />
-        <Route path="/create" element={<CreatePage/>} />
-        <Route path="/note/:id" element={<NoteDetailPage/>} />
+        <Route path="/" element={<HomePage user={user} setUser={setUser} error={error} authLoading={authLoading}/>} />
+        <Route path="/login" element={user ? <Navigate to="/"/> : <Login setUser={setUser}/>} />
+        <Route path="/register" element={user ? <Navigate to="/"/> : <Register setUser={setUser}/>} />
+        <Route path="/create" element={<CreatePage user={user} setUser={setUser} authLoading={authLoading}/>} />
+        <Route path="/note/:id" element={<NoteDetailPage user={user} setUser={setUser} authLoading={authLoading}/>} />
+        <Route path="*" element={<PageNotFound user={user} setUser={setUser} authLoading={authLoading}/>}/>
       </Routes>
 
     </div>
