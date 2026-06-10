@@ -38,9 +38,10 @@ export async function getNoteById (req,res) {
 // create a new note with title and content from the request body
 export async function createANote (req,res){
     try{
-        const {title, content} = req.body
+        const {userId, title, content} = req.body
 
         const note = new Note({
+            userId,
             title,
             content
         });
