@@ -40,6 +40,15 @@ const App = () => {
     fetchUser();
   }, []);
 
+  // Prevent the app from rendering until auth is checked
+  if (authLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <span className="loading loading-spinner loading-lg text-secondary"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="relative min-h-screen">
       <div className="absolute inset-0 -z-10  h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
