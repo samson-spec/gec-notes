@@ -7,7 +7,7 @@ import toast from "react-hot-toast"
 import NoteCard from "../components/NoteCard"
 import NotesNotFound from "../components/NotesNotFound"
 
-const HomePage = ({user, setUser, error, authLoading}) => {
+const HomePage = ({user, setUser, authLoading}) => {
     const [isRateLimited, setIsRateLimited] = useState(false)
     const [notes, setNotes] = useState([])
     const [loading, setLoading] = useState(true)

@@ -30,7 +30,6 @@ app.use(rateLimiter); //apply rate limiting to all routes
 app.use('/api/notes', notesRoutes); 
 app.use('/api/users', authRoutes);
 
-
 if(process.env.NODE_ENV == "production"){
     app.use(express.static(path.join(__dirname, "../frontend/dist")))
 
