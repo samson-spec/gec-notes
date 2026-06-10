@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router";
 import api from "../lib/axios";
 import toast from "react-hot-toast";
-import { ArrowLeftIcon, LoaderIcon, Trash2Icon } from "lucide-react";
+import { ArrowLeftIcon, Trash2Icon } from "lucide-react";
 import Navbar from "../components/Navbar";
 
 const NoteDetailPage = ({user, setUser, authLoading}) => {
@@ -66,10 +66,10 @@ const NoteDetailPage = ({user, setUser, authLoading}) => {
 
   if(loading){
     return (
-      <div className="min-h-screen bg-base-200 flex items-center justify-center">
-        <LoaderIcon className="animate-spin size-10"/>
+      <div className="min-h-screen flex items-center justify-center">
+        <span className="loading loading-spinner loading-lg text-secondary"></span>
       </div>
-    )
+    );
   }
 
   return (
