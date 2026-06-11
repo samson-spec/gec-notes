@@ -136,42 +136,42 @@ const HomePage = ({user, setUser, authLoading}) => {
                             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
 
                                 <div className="p-4 rounded-xl border border-base-300">
-                                <div className="text-secondary font-semibold mb-1">📝 Note Management</div>
+                                <div className="text-secondary font-semibold mb-1">Note Management</div>
                                 <p className="text-sm text-base-content/70">
                                     Create, edit, and organize personal or work-related notes efficiently with a clean interface.
                                 </p>
                                 </div>
 
                                 <div className="p-4 rounded-xl border border-base-300">
-                                <div className="text-secondary font-semibold mb-1">🔒 Secure Access</div>
+                                <div className="text-secondary font-semibold mb-1">Secure Access</div>
                                 <p className="text-sm text-base-content/70">
                                     Each employee accesses only their own notes using secure authentication and protected routes.
                                 </p>
                                 </div>
 
                                 <div className="p-4 rounded-xl border border-base-300">
-                                <div className="text-secondary font-semibold mb-1">⚡ Fast Performance</div>
+                                <div className="text-secondary font-semibold mb-1">Fast Performance</div>
                                 <p className="text-sm text-base-content/70">
                                     Lightweight design ensures quick loading, smooth navigation, and responsive interactions.
                                 </p>
                                 </div>
 
                                 <div className="p-4 rounded-xl border border-base-300">
-                                <div className="text-secondary font-semibold mb-1">📂 Centralized Workspace</div>
+                                <div className="text-secondary font-semibold mb-1">Centralized Workspace</div>
                                 <p className="text-sm text-base-content/70">
                                     Keep all important updates, reminders, and ideas in one organized system.
                                 </p>
                                 </div>
 
                                 <div className="p-4 rounded-xl border border-base-300">
-                                <div className="text-secondary font-semibold mb-1">👥 Team Ready</div>
+                                <div className="text-secondary font-semibold mb-1">Team Ready</div>
                                 <p className="text-sm text-base-content/70">
                                     Built to support internal collaboration workflows and future team-based features.
                                 </p>
                                 </div>
 
                                 <div className="p-4 rounded-xl border border-base-300">
-                                <div className="text-secondary font-semibold mb-1">📊 Scalable System</div>
+                                <div className="text-secondary font-semibold mb-1">Scalable System</div>
                                 <p className="text-sm text-base-content/70">
                                     Designed with scalability in mind to support future enterprise features and integrations.
                                 </p>
