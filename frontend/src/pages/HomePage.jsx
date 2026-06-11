@@ -94,7 +94,7 @@ const HomePage = ({user, setUser, authLoading}) => {
                     <div className="mb-6">
                         <div className="bg-base-100 rounded-xl shadow-sm border border-base-300 p-6">
                             <h2 className="text-2xl font-bold text-secondary">
-                                Welcome 👋
+                                Welcome to GEC Notes 👋
                             </h2>
 
                             <p className="mt-2 text-base-content/70">
