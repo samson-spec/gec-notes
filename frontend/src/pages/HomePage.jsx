@@ -8,11 +8,21 @@ import NoteCard from "../components/NoteCard"
 import NotesNotFound from "../components/NotesNotFound"
 
 const HomePage = ({user, setUser, authLoading}) => {
+
     const [isRateLimited, setIsRateLimited] = useState(false)
     const [notes, setNotes] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+
+        setLoading(true);
+
+        if (!user) {
+            setNotes([]);
+            setLoading(false);
+            return;
+        }
+
         const fetchNotes = async () => {
             try{
                 const res = await api.get("/notes")
@@ -35,7 +45,7 @@ const HomePage = ({user, setUser, authLoading}) => {
         }
 
         fetchNotes();
-    }, [])
+    }, [user]);
 
 
     return (
@@ -83,32 +93,107 @@ const HomePage = ({user, setUser, authLoading}) => {
                 ) : (
                     <div className="mb-6">
                         <div className="bg-base-100 rounded-xl shadow-sm border border-base-300 p-6">
-                        <h2 className="text-2xl font-bold text-secondary">
-                            Welcome 👋
-                        </h2>
+                            <h2 className="text-2xl font-bold text-secondary">
+                                Welcome 👋
+                            </h2>
 
-                        <p className="mt-2 text-base-content/70">
-                            Please login or create an account to access your notes and manage them securely.
-                        </p>
+                            <p className="mt-2 text-base-content/70">
+                                Please login or create an account to access your notes and manage them securely.
+                            </p>
 
-                        <div className="mt-4 flex gap-3">
-                            <a href="/login" className="btn btn-secondary text-white">
-                            Login
-                            </a>
+                            <div className="mt-4 flex gap-3">
+                                <a href="/login" className="btn btn-secondary text-white">
+                                Login
+                                </a>
 
-                            <a href="/register" className="btn btn-outline hover:!text-white btn-secondary">
-                            Register
-                            </a>
+                                <a href="/register" className="btn btn-outline hover:!text-white btn-secondary">
+                                Register
+                                </a>
+                            </div>
                         </div>
+
+                        <div className="mt-6 bg-base-100 rounded-xl shadow-sm border border-base-300 p-6">
+                            {/* Header */}
+                            <div className="flex items-center justify-between mb-4">
+                                <h3 className="text-xl font-bold text-secondary">
+                                About GEC Notes
+                                </h3>
+
+                                <span className="badge badge-secondary badge-outline">
+                                Internal Tool
+                                </span>
+                            </div>
+
+                            {/* Description */}
+                            <p className="text-base-content/70 leading-relaxed">
+                                GEC Notes is an internal productivity tool built for employees to securely
+                                create, manage, and organize work-related notes, reminders, and updates.
+                                It is designed to streamline communication, improve documentation, and
+                                centralize important information across teams.
+                            </p>
+
+                            {/* Feature Grid */}
+                            <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+                                <div className="p-4 rounded-xl border border-base-300">
+                                <div className="text-secondary font-semibold mb-1">📝 Note Management</div>
+                                <p className="text-sm text-base-content/70">
+                                    Create, edit, and organize personal or work-related notes efficiently with a clean interface.
+                                </p>
+                                </div>
+
+                                <div className="p-4 rounded-xl border border-base-300">
+                                <div className="text-secondary font-semibold mb-1">🔒 Secure Access</div>
+                                <p className="text-sm text-base-content/70">
+                                    Each employee accesses only their own notes using secure authentication and protected routes.
+                                </p>
+                                </div>
+
+                                <div className="p-4 rounded-xl border border-base-300">
+                                <div className="text-secondary font-semibold mb-1">⚡ Fast Performance</div>
+                                <p className="text-sm text-base-content/70">
+                                    Lightweight design ensures quick loading, smooth navigation, and responsive interactions.
+                                </p>
+                                </div>
+
+                                <div className="p-4 rounded-xl border border-base-300">
+                                <div className="text-secondary font-semibold mb-1">📂 Centralized Workspace</div>
+                                <p className="text-sm text-base-content/70">
+                                    Keep all important updates, reminders, and ideas in one organized system.
+                                </p>
+                                </div>
+
+                                <div className="p-4 rounded-xl border border-base-300">
+                                <div className="text-secondary font-semibold mb-1">👥 Team Ready</div>
+                                <p className="text-sm text-base-content/70">
+                                    Built to support internal collaboration workflows and future team-based features.
+                                </p>
+                                </div>
+
+                                <div className="p-4 rounded-xl border border-base-300">
+                                <div className="text-secondary font-semibold mb-1">📊 Scalable System</div>
+                                <p className="text-sm text-base-content/70">
+                                    Designed with scalability in mind to support future enterprise features and integrations.
+                                </p>
+                                </div>
+                            </div>
+
+                            {/* Footer section */}
+                            <div className="mt-6 p-4 bg-secondary/10 rounded-xl border border-secondary/20">
+                                <p className="text-sm text-base-content/70">
+                                Built for internal use at <span className="font-semibold text-secondary">GEC</span>.
+                                This system helps employees maintain structured digital documentation and improve daily workflow efficiency.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 ))}
 
                 {loading && <div className="text-center text-secondary py-10">Loading notes...</div>}
 
-                {!loading && notes.length === 0 && !isRateLimited && <NotesNotFound/>}
+                {user && !loading && notes.length === 0 && !isRateLimited && <NotesNotFound/>}
 
-                {notes.length > 0 && !isRateLimited && (
+                {user && notes.length > 0 && !isRateLimited && (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         {notes.map((note) => (
                             <NoteCard key={note._id} note={note} setNotes={setNotes}/>

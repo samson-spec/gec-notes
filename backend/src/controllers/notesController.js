@@ -5,7 +5,7 @@ import Note from "../models/Note.js"
 // retrieve all notes, sorted by creation date (newest first)
 export async function getAllNotes (req,res) {
     try{
-        const notes = await Note.find().sort({createdAt: -1}); // newest first
+        const notes = await Note.find({userId: req.user._id,}).sort({createdAt: -1}); // newest first
         res.status(200).json(notes);
     }catch (error) {
 
@@ -38,10 +38,11 @@ export async function getNoteById (req,res) {
 // create a new note with title and content from the request body
 export async function createANote (req,res){
     try{
-        const {userId, title, content} = req.body
+        // const {userId, title, content} = req.body
+        const {title, content} = req.body
 
         const note = new Note({
-            userId,
+            userId: req.user._id,
             title,
             content
         });
