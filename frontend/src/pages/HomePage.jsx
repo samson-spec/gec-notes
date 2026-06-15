@@ -16,6 +16,7 @@ const HomePage = ({user, setUser, authLoading}) => {
     useEffect(() => {
 
         setLoading(true);
+        
 
         if (!user) {
             setNotes([]);
