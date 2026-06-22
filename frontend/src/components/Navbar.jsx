@@ -33,7 +33,7 @@ const Navbar = ({user, setUser, authLoading}) => {
     <header className="bg-base-100 border-b border-base-content/10">
         <div className="mx-auto max-w-6xl p-4">
              <div className="flex items-center justify-between">
-                <h1 className="text-2xl sm:text-3xl font-bold text-secondary font-mono tracking-tight">GEC Notes</h1>
+                <h1 className="text-2xl sm:text-3xl font-bold text-secondary font-mono tracking-tight">Ember Notes</h1>
 
                 {/* Desktop nav */}
                 <div className="hidden md:flex items-center gap-4">
