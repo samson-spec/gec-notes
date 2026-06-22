@@ -181,7 +181,7 @@ const HomePage = ({user, setUser, authLoading}) => {
                             {/* Footer section */}
                             <div className="mt-6 p-4 bg-secondary/10 rounded-xl border border-secondary/20">
                                 <p className="text-sm text-base-content/70">
-                                Built for internal use at <span className="font-semibold text-secondary">GEC</span>.
+                                Built for internal use at <span className="font-semibold text-secondary">Ember</span>.
                                 This system helps employees maintain structured digital documentation and improve daily workflow efficiency.
                                 </p>
                             </div>
