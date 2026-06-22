@@ -116,7 +116,7 @@ const HomePage = ({user, setUser, authLoading}) => {
                             {/* Header */}
                             <div className="flex items-center justify-between mb-4">
                                 <h3 className="text-xl font-bold text-secondary">
-                                About GEC Notes
+                                About Ember Notes
                                 </h3>
 
                                 <span className="badge badge-secondary badge-outline">
@@ -126,7 +126,7 @@ const HomePage = ({user, setUser, authLoading}) => {
 
                             {/* Description */}
                             <p className="text-base-content/70 leading-relaxed">
-                                GEC Notes is an internal productivity tool built for employees to securely
+                                Ember Notes is an internal productivity tool built for employees to securely
                                 create, manage, and organize work-related notes, reminders, and updates.
                                 It is designed to streamline communication, improve documentation, and
                                 centralize important information across teams.
